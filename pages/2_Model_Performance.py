@@ -38,11 +38,12 @@ df.drop(
     inplace=True
 )
 
-df["Age"].fillna(df["Age"].median(), inplace=True)
+df["Age"] = df["Age"].fillna(
+    df["Age"].median()
+)
 
-df["Embarked"].fillna(
-    df["Embarked"].mode()[0],
-    inplace=True
+df["Embarked"] = df["Embarked"].fillna(
+    df["Embarked"].mode()[0]
 )
 
 df["Sex"] = df["Sex"].map({
@@ -55,7 +56,7 @@ df = pd.get_dummies(
     columns=["Embarked"],
     drop_first=True
 )
-
+df = df.dropna()
 X = df.drop("Survived", axis=1)
 y = df["Survived"]
 
